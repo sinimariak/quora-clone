@@ -1,0 +1,16 @@
+<h2>Wanna ask something else?</h2>
+<form method=POST action=/ask>
+	<input type=text placeholder="Question" name=question[title]>
+	<input type=submit value="Ask">
+</form>
+
+<h2>Top stories</h2>
+
+<% @questions.each do |question| %> 
+<ul>
+<%= question.title %> 
+<form method=get action="/questions/<%= question.id %>">
+<input type=submit value="Answers"> 
+</form>
+</ul> 
+<% end %>

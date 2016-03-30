@@ -1,0 +1,22 @@
+<h2><%= @question.title %></h2>
+
+<form method=POST action="/questions/<%= @question.id %>/answer">
+	<input type=text placeholder="Answer this!" name=answer[title]>
+	<input type=submit value="Answer">
+</form>
+
+<h3>Top answers</h3>
+
+<% unless @answers.present? %> 
+	<%= "No one has answered yet!" %>
+	<br><br>
+<% else %> 
+	<% @answers.each do |answer| %>
+	<ul><%= answer.title %></ul> 
+	<% end %>
+<% end %>
+
+
+
+
+

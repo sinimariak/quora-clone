@@ -1,3 +1,7 @@
 get '/' do
-  erb :"static/index"
+	erb :"static/index"
+end
+
+get '/home' do 
+	erb :"static/home"
 end

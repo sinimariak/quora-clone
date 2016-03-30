@@ -1,0 +1,15 @@
+<h2>Sign up!</h2>
+
+<form method=POST action=/users/new>
+	<input type=text placeholder="name" name=user[name]><br>
+	<input type=text placeholder="email" name=user[email]><br>
+	<input type=password placeholder="password" name=user[password]></br>
+	<input type=submit value="Sign up">
+</form>
+
+<% unless session['error_message'].nil? %>
+		<% session['error_message'].each do |specific_message, value| %>
+		<h2><%= value[0] %></h2>
+		<% end %>
+	<% session['error_message'] = nil %>
+<% end %>

@@ -4,5 +4,11 @@
 	</head>
 	<body>
 		<%= yield %>
+		<% if logged_in? %>
+		<a href="/home">Home</a>
+		<a href="/questions/my_questions">My questions</a>
+		<a href="/questions/my_answers">My answers</a>
+		<a href="/logout">Log Out</a>
+		<% end %>
 	</body>
 </html>
