@@ -12,7 +12,21 @@
 	<br><br>
 <% else %> 
 	<% @answers.each do |answer| %>
-	<ul><%= answer.title %></ul> 
+	<ul><%= answer.title %>
+<!-- displays the voting buttons if user has not voted for the answer -->
+	<% if answer.answervotes.find_by(user_id: current_user.id).nil? %>
+<!-- Upvote button -->
+	<form method=post action="/questions/<%= @question.id %>/<%= answer.id %>/upvote">
+		<input type=submit value="Upvote"></form>
+<!-- Downvote button -->
+	<form method=post action="/questions/<%= @question.id %>/<%= answer.id %>/downvote">
+		<input type=submit value="Downvote"></form>
+	<% end %>
+<!-- Number of votes -->
+	<br><%= "Upvotes: " %> <%= Answervote.where(vote: '1').count %>
+	<%= "Downvotes: " %> <%= Answervote.where(vote: '0').count %></br>
+
+	</ul> 
 	<% end %>
 <% end %>
 
