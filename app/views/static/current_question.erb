@@ -23,8 +23,9 @@
 		<input type=submit value="Downvote"></form>
 	<% end %>
 <!-- Number of votes -->
-	<br><%= "Upvotes: " %> <%= Answervote.where(vote: '1').count %>
-	<%= "Downvotes: " %> <%= Answervote.where(vote: '0').count %></br>
+	<br><%= "Upvotes: " %> <%= Answervote.where(vote: '1', answer_id: answer.id).count %>
+
+	<%= "Downvotes: " %> <%= Answervote.where(vote: '0', answer_id: answer.id).count %></br>
 
 	</ul> 
 	<% end %>

@@ -1,7 +1,10 @@
 <h2>My answers</h2>
-<% @my_answers.each do |answer| %>
-<ul>
-<a href='/questions/<%= answer.question.id %>'><%= answer.question.title %></a>
-	<%= answer.title %></ul>
 
+<% unless @my_answers.present? %>
+<%= "You haven't answered any question yet." %><br><br>
+<% else %>
+<% @my_answers.each do |answer| %>
+<ul><a href='/questions/<%= answer.question.id %>'><%= answer.question.title %></a>
+	<%= answer.title %></ul>
+	<% end %>
 <% end %>

@@ -1,7 +1,7 @@
-<h2>Welcome, <%= current_user.name %>!</h2>
+<h2>Logged in as <%= current_user.name %>!</h2>
 
 <h3>Ask question</h3>
-<form method=POST action=/ask>
+<form method=POST action=/questions>
 	<input type=text placeholder="Question" name=question[title]><br></br>
 	<input type=submit value="Ask">
 </form>
@@ -11,6 +11,18 @@
 <% @questions.each do |question| %> 
 <ul>
 <%= question.title %> 
+<!-- displays the voting buttons if user has not voted for the answer -->
+	<% if question.questionvotes.find_by(user_id: current_user.id).nil? %>
+<!-- Upvote button -->
+	<form method=post action="/questions/<%= question.id %>/upvote">
+		<input type=submit value="Upvote"></form>
+<!-- Downvote button -->
+	<form method=post action="/questions/<%= question.id %>/downvote">
+		<input type=submit value="Downvote"></form>
+	<% end %>
+<!-- Number of votes -->
+	<%= "Upvotes: " %> <%= Questionvote.where(vote: '1', question_id: question.id).count %>
+	<%= "Downvotes: " %> <%= Questionvote.where(vote: '0', question_id: question.id).count %>
 <form method=get action="/questions/<%= question.id %>">
 <input type=submit value="Show answers"> 
 </form>

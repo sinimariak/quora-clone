@@ -1,5 +1,9 @@
 <h2>My questions</h2>
 
-<% @my_questions.each do |question| %>
-<ul><%= question.title %> </ul>
+	<% unless @my_questions.present? %>
+	<%= "You haven't asked anything yet." %><br><br>
+	<% else %>
+	<% @my_questions.each do |question| %>
+	<ul><%= question.title %> </ul>
+	<% end %>
 <% end %>

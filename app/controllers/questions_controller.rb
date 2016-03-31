@@ -4,15 +4,15 @@ get '/home' do
 	erb :"static/home"
 end
 
-post '/ask' do
+post '/questions' do
 	question = Question.new(title: params[:question][:title], user_id: current_user.id)
 	question.save
-	redirect '/questions'
+	redirect '/home'
 end
 
 get '/questions' do
 	@questions = Question.all.order(created_at: :desc)
-	erb :"static/questions"
+	erb :"static/home"
 end
 
 get '/questions/my_questions' do
@@ -20,11 +20,20 @@ get '/questions/my_questions' do
 	erb :"static/my_questions"
 end
 
-get '/questions/:id' do
-	@question = Question.find(params[:id])
+get '/questions/:q_id' do
+	@question = Question.find(params[:q_id])
 	@answers = Answer.where(question_id: @question.id).all
 	erb :"static/current_question"
 end
 
+post '/questions/:q_id/upvote' do
+	questionvote = Questionvote.create(vote: '1', user_id: current_user.id, question_id: params[:q_id])
+	redirect '/home'
+end
+
+post '/questions/:q_id/downvote' do
+	questionvote = Questionvote.create(vote: '0', user_id: current_user.id, question_id: params[:q_id])
+	redirect '/home' 
+end
 
 
