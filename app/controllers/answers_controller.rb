@@ -9,6 +9,11 @@ get '/questions/my_answers' do
 	erb :"static/my_answers"
 end
 
+delete '/questions/:q_id/:a_id' do
+	Answer.delete = (params[:a_id])
+	redirect '/questions/my_answers'
+end
+
 post '/questions/:q_id/:a_id/upvote' do
 	answervote = Answervote.create(vote: '1', user_id: current_user.id, answer_id: params[:a_id])
 	redirect '/questions/' + params[:q_id]

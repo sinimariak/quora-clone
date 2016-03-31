@@ -5,6 +5,9 @@
 <% else %>
 <% @my_answers.each do |answer| %>
 <ul><a href='/questions/<%= answer.question.id %>'><%= answer.question.title %></a>
-	<%= answer.title %></ul>
+	<%= answer.title %>
+	<form method=post action="/questions/<%= answer.question.id %>/<%= answer.id %>">
+	<input type=hidden value=delete>
+	<input type=submit value="Delete"></form></ul>
 	<% end %>
 <% end %>

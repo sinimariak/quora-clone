@@ -4,6 +4,11 @@
 	<%= "You haven't asked anything yet." %><br><br>
 	<% else %>
 	<% @my_questions.each do |question| %>
-	<ul><%= question.title %> </ul>
+	<ul><%= question.title %> 
+		<form method=get action="/questions/<%= question.id %>">
+		<input type=submit value="Show answers"></form>
+		<form method=post action="/questions/<%= question.id %>">
+		<input type="hidden" name=_method value=DELETE>
+		<input type="submit" value="Delete"></form></ul>
 	<% end %>
 <% end %>

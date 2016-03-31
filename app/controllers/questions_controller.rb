@@ -26,6 +26,11 @@ get '/questions/:q_id' do
 	erb :"static/current_question"
 end
 
+delete '/questions/:q_id' do
+	Question.delete(params[:q_id])
+	redirect '/questions/my_questions'
+end
+
 post '/questions/:q_id/upvote' do
 	questionvote = Questionvote.create(vote: '1', user_id: current_user.id, question_id: params[:q_id])
 	redirect '/home'
